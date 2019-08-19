@@ -1,8 +1,23 @@
-#include <Arduino.h>
+/**
+  ******************************************************************************
+  * @file    lab1.ino
+  * @brief   Experimento de acionamento de rele, transistor como
+  *          chave e display 7 segmentos.
+  * @authors 
+  ******************************************************************************
+  */
+
+/* Includes ------------------------------------------------------------------*/
+ #include <Arduino.h>
+
+/* Defines -------------------------------------------------------------------*/
+
+// #1.  TODO: Defina constante de tempo para ser utilizada no delay em msm 
+#define DELAY_MS 1
 
 #define PIN_BUTTON  3
-#define PIN_GREEN   4
-#define PIN_RED     2
+
+// #1.  TODO: Defina a constante do pino do LED13
 
 #define PIN_A 5
 #define PIN_B 6
@@ -12,62 +27,31 @@
 #define PIN_F 10
 #define PIN_G 11
 
+/* Private variables ---------------------------------------------------------*/
 
-void setDisplayDigit(int digit)
-{
-  if(digit!=1 && digit != 4)
-  digitalWrite(PIN_A,HIGH);
+/* Private function prototypes -----------------------------------------------*/
+// Debug
+void debugLD();
 
-  if(digit != 5 && digit != 6)
-  digitalWrite(PIN_B,HIGH);
+// Botao
+int isButtonPressed();
 
-  if(digit !=2)
-  digitalWrite(PIN_C,HIGH);
+// Display
+void setDisplayOn();
+void setDisplayOff();
+void setDisplayDigit(int digit);
 
-  if(digit != 1 && digit !=4 && digit !=7)
-  digitalWrite(PIN_D,HIGH);
+/* Private user code ---------------------------------------------------------*/
 
-  if(digit == 2 || digit ==6 || digit == 8 || digit==0)
-  digitalWrite(PIN_E,HIGH);
-
-  if(digit != 1 && digit !=2 && digit!=3 && digit !=7)
-  digitalWrite(PIN_F,HIGH);
-
-  if (digit!=0 && digit!=1 && digit !=7)
-  digitalWrite(PIN_G,HIGH);
-}
-
-void turnDisplayOff()
-{
-  digitalWrite(PIN_A,LOW);
-  digitalWrite(PIN_B,LOW);
-  digitalWrite(PIN_C,LOW);
-  digitalWrite(PIN_D,LOW);
-  digitalWrite(PIN_E,LOW);
-  digitalWrite(PIN_F,LOW);
-  digitalWrite(PIN_G,LOW);
-}
-
-void setDisplayOn()
-{
-  int i;
-  for(i=0; i<10; i++)
-  {
-    setDisplayDigit(i);
-    delay(1000);
-    turnDisplayOff();
-  }
-}
-
+/**
+  * @brief  Inicializacao dos perifericos e das 
+  *         entradas e saidas utilizadas.
+  * @param  None
+  * @retval None
+  */
 void setup() 
 {  
-
-  Serial.begin(9600);
-
-  pinMode(PIN_BUTTON, INPUT);
- 
-  pinMode(PIN_GREEN, OUTPUT);
-  pinMode(PIN_RED, OUTPUT);
+  // 2#. TODO: Inicializar o LD13    
 
   pinMode(PIN_A, OUTPUT);
   pinMode(PIN_B, OUTPUT);
@@ -79,97 +63,99 @@ void setup()
 
 }
 
-void loop2()
-{
-   // Se o botao for pressionado
-  if(digitalRead(PIN_BUTTON) == HIGH)
-  {
-    // Contagem 
-    setDisplayDigit(9);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(8);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(7);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(6);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(5);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(4);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(3);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(2);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(1);
-    delay(1000);
-    turnDisplayOff();
-
-    setDisplayDigit(0);
-    delay(1000);
-    turnDisplayOff();
-
-
-
-    // Liga vermelho
-    digitalWrite(PIN_RED, HIGH);
-    
-    // Desliga verde
-    digitalWrite(PIN_GREEN, LOW);
-    delay(1000);
-
-  }
-  
-  // Se nao for pressionado
-  else
-  {
-    // Apaga Display
-    turnDisplayOff();
-
-    // Desliga vermelho
-    digitalWrite(PIN_RED, LOW);
-    
-    // Liga verde
-    digitalWrite(PIN_GREEN, HIGH);
-    delay(100);
-    digitalWrite(PIN_GREEN, LOW);
-    delay(100);
-  }  
-
-}
-
+/**
+  * @brief Loop embarcado.
+  * @param  None
+  * @retval None
+  */
 void loop() 
 {
- 
-  if(Serial.available())
-  {
-    char c = Serial.read();
-    
-    if(c == 'l')
-    {
-      digitalWrite(PIN_GREEN, HIGH);
-    }
-    else
-    {
-      digitalWrite(PIN_GREEN, LOW);
-    }
-  
-  }
+    debugLD(DELAY_MS);
+    setDisplayCount();
+}
 
+
+// #3. TODO: Fazer cabecalho da funcao que pisca o LD13
+/**
+  * @brief  O que essa função faz?
+  * @param  Quais os parametros de entrada?
+  * @retval Qual o retorno?
+  */
+void debugLD(int delay_ms)
+{
+    // 4#. TODO: Implementar uma funcao que pisque o LD13
+    //      conforme o tempo_ms.
+    //      Utilize a funcao 'delay()'
+}
+
+
+/**
+  * @brief  Verifica se o botao esta 
+  *         pressionado
+  * @param  None
+  * @retval int: estado do botao 
+  *              1- pressionado 
+  *              0- caso contrario
+  */
+int isButtonPressed()
+{
+    return 0;
+}
+
+
+/**
+  * @brief  Realiza o acionamento do display 7seg conforme a entrada.
+  * @param  digit: um inteiro de 0-9.
+  * @retval None
+  */
+void setDisplayDigit(int digit)
+{
+    if(digit!=1 && digit != 4)
+    digitalWrite(PIN_A,HIGH);
+
+    if(digit != 5 && digit != 6)
+    digitalWrite(PIN_B,HIGH);
+
+    if(digit !=2)
+    digitalWrite(PIN_C,HIGH);
+
+    if(digit != 1 && digit !=4 && digit !=7)
+    digitalWrite(PIN_D,HIGH);
+
+    if(digit == 2 || digit ==6 || digit == 8 || digit==0)
+    digitalWrite(PIN_E,HIGH);
+
+    if(digit != 1 && digit !=2 && digit!=3 && digit !=7)
+    digitalWrite(PIN_F,HIGH);
+
+    if (digit!=0 && digit!=1 && digit !=7)
+    digitalWrite(PIN_G,HIGH);
+}
+
+/**
+  * @brief  Desliga individualmente todos os LEDs 
+  *         do display 7seg
+  * @param  None
+  * @retval None
+  */
+void setDisplayOff()
+{
+}
+
+/**
+  * @brief  Realiza o acionamento do display
+  *         de forma a exibir uma contagem
+  *         crescente de 0-9
+  * @param  None
+  * @retval None
+  */
+void setDisplayCount()
+{
+    int i;
+    for(i=0; i>=9; i++)
+    {
+        setDisplayDigit(i);
+        delay(DELAY_MS);
+        setDisplayOff();
+    }
 }
