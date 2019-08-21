@@ -6,12 +6,14 @@
 /* Private define ------------------------------------------------------------*/
 # define DELAY_TIME 1000
 
+
 /* Private variables ---------------------------------------------------------*/
 long long nCount = 0;
 
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+
 
 /* Private user code ---------------------------------------------------------*/
 int main(void)
@@ -45,10 +47,11 @@ int delay_ms(int time)
   return 0;
 }
 
+
 /* Callbacks -------------------------------------------------------------*/
 void HAL_SYSTICK_Callback(void)
 {
-  if(delay_ms(500))
+  if(delay_ms(DELAY_TIME))
   {
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
   }
@@ -69,6 +72,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
     }
 }
+
 
 /* Sys Config -------------------------------------------------------------*/
 void SystemClock_Config(void)
