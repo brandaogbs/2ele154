@@ -1,0 +1,43 @@
+1. Faça um Programa que peça um número e então mostre a mensagem O número informado foi [número]. 
+
+2. Faça um Programa que calcule a área de um quadrado, em seguida mostre o dobro desta área para o usuário. 
+
+3. Faça um Programa que peça 2 números inteiros e um número real. Calcule e mostre:
+
+    o produto do dobro do primeiro com metade do segundo .
+    a soma do triplo do primeiro com o terceiro.
+    o terceiro elevado ao cubo. 
+
+4. Tendo como dado de entrada a altura (h) de uma pessoa, construa um algoritmo que calcule seu peso ideal, utilizando as seguintes fórmulas:
+
+    Para homens: (72.7*h) - 58
+    Para mulheres: (62.1*h) - 44.7 
+
+
+-----------------------------------------
+
+1. Faça um Programa que peça dois números e imprima o maior deles. 
+
+2. Faça um Programa que pergunte em que turno você estuda. Peça para digitar M-matutino ou V-Vespertino ou N- Noturno. Imprima a mensagem "Bom Dia!", "Boa Tarde!" ou "Boa Noite!" ou "Valor Inválido!", conforme o caso. 
+
+3. Faça um Programa que peça uma data no formato dd/mm/aaaa e determine se a mesma é uma data válida. 
+
+
+-----------------------------------------
+
+
+1. Reverso do número. Faça uma função que retorne o reverso de um número inteiro informado. Por exemplo: 127 -> 721. 
+
+2. Faça um programa para imprimir:
+
+        1
+        2   2
+        3   3   3
+        .....
+        n   n   n   n   n   n  ... n
+
+    para um n informado pelo usuário. Use uma função que receba um valor n inteiro e imprima até a n-ésima linha. 
+
+3. Faça um programa, com uma função que necessite de três argumentos, e que forneça a soma desses três argumentos.  
+
+4. Faça um programa, com uma função que necessite de um argumento. A função retorna o valor de caractere ‘P’, se seu argumento for positivo, e ‘N’, se seu argumento for zero ou negativo. 
