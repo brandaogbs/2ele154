@@ -4,19 +4,14 @@
 #include "gpio.h"
 
 /* Private define ------------------------------------------------------------*/
-# define DELAY_TIME 1000
-
-/* Private variables ---------------------------------------------------------*/
-long long nCount = 0;
-
+uint8_t iPulse = 1;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 
-/* Private user code ---------------------------------------------------------*/
 int main(void)
 {
-  /* MCU Configuration */
+  /* MCU Configuration--------------------------------------------------------*/
   HAL_Init();
 
   /* Configure the system clock */
@@ -24,49 +19,27 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_TIM2_Init();
+  MX_TIM4_Init();
+ 
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
 
-  HAL_TIM_Base_Start_IT(&htim2);
-
-  while (1)
+  while (1) 
   {
-  }
-}
 
-int delay_ms(int time)
-{
-  nCount++;
-  
-  if(nCount >= time/2)
-  {
-    nCount = 0;
-    return 1;
   }
-  return 0;
 }
 
 /* Callbacks -------------------------------------------------------------*/
-void HAL_SYSTICK_Callback(void)
-{
-  if(delay_ms(500))
-  {
-    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
-  }
-}
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)  
-{
-    if (htim->Instance==TIM2)
-    {
-        HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-    }
-}
-
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  
 {
-    if (GPIO_Pin==GPIO_PIN_0) 
+    if (GPIO_Pin==GPIO_PIN_3) 
     {
-      HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
+      iPulse = ( (iPulse+1)%100) ;
+		  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (iPulse + 1)%100 );
+      volatile int i = 0;
+      for(i=0;i<10000;i++){}
     }
 }
 
@@ -110,7 +83,6 @@ void SystemClock_Config(void)
   }
 }
 
-
 void Error_Handler(void)
 {
 }
@@ -119,4 +91,4 @@ void Error_Handler(void)
 void assert_failed(uint8_t *file, uint32_t line)
 { 
 }
-#endif /* USE_FULL_ASSERT */
+#endif 
