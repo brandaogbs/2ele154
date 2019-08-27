@@ -1,6 +1,6 @@
-.pio
-.vscode
-.src/.vscode
+.pio/*
+.vscode/*
+.src/.vscode/*
 .travis.yml
 platformio.ini
 .gitignore
