@@ -59,8 +59,6 @@ def block_update(blockX, blockY, blockW, blockH, blockColor, blockSpeed):
     return blockX, blockY, blockColor
 
 
-            
-
 ###############################################################################
 #                                   Texto
 ###############################################################################
@@ -77,9 +75,6 @@ def message_display(text, color):
     gameDisplay.blit(TextSurf, TextRect)
     pygame.display.update()
 
-    time.sleep(2)
-    game_loop()
-
 
 ###############################################################################
 #                                 Auxiliares
@@ -87,12 +82,16 @@ def message_display(text, color):
 def random_color():
     return random.choice(blockColors)
 
+#TODO: Reiniciar jogo
+
 def check_crash(carX, carY, carW, blockX, blockY, blockW, blockH):
     if carY < blockY + blockH:
         if carX > blockX and carX < blockX + blockW:
             message_display("Você bateu!", white)
+            time.sleep(2)
         if carX + carW > blockX and carX + carW < blockX + blockW:
             message_display("Você bateu!", white)
+            time.sleep(2)
 
 #TODO: Criar função de pontuação
 
@@ -150,7 +149,6 @@ def game_loop():
         clock.tick(60)
 
 #TODO: Criar tela de inicialização
-
 game_loop()
 
 pygame.quit()
