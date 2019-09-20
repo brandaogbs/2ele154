@@ -149,7 +149,7 @@ def game_loop():
         clock.tick(60)
 
 ###############################################################################
-#                                 Auxiliares
+#                                 Texto
 ###############################################################################
 # renderiza o texto
 def text_objects(text, font, color):
@@ -167,7 +167,9 @@ def display_message(text, color):
     pygame.display.update()
     
 
-
+###############################################################################
+#                                 Auxiliares
+###############################################################################
 # tela inicial do jogo
 def game_start():
     intro = True
@@ -192,10 +194,6 @@ def game_start():
         pygame.display.update()
         clock.tick(15)
 
-
-###############################################################################
-#                                 Auxiliares
-###############################################################################
 # pega uma cor aleatoria da lista
 def random_color():
     return random.choice(blockColors)
