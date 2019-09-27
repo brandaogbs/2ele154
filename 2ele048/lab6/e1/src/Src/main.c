@@ -9,17 +9,21 @@
 #include <stdarg.h>
 #include <string.h>
 
-#define THRESHOLD 0
-#define SETPOINT  250
+#define THRESHOLD 60
+#define SETPOINT  600
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+
+uint32_t i = 0;
+uint32_t soma = 0;
 
 uint32_t uiADC;
 char pBufferTx[20];
 float fADC;
 
 int main(void){
+  
   /* MCU Configuration--------------------------------------------------------*/
   HAL_Init();
   
@@ -50,40 +54,49 @@ int main(void){
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
   
+  i++;
+
   uiADC = HAL_ADC_GetValue(hadc);
-  
   fADC = (3000* uiADC)/4096;
-
   uiADC = (int) fADC;
+  
+  soma += uiADC;
 
-  if(uiADC < SETPOINT)
+  if(i == 10000/2)
   {
-    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_SET);
-    pBufferTx[6] = 'L';
-  }
-  else if(uiADC > SETPOINT + THRESHOLD)
-  {
-    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_RESET);    
-    pBufferTx[6] = 'D';
-  }
-  
-  pBufferTx[7] = '\n';
- 
-  pBufferTx[5] = uiADC%10 + '0';
-  uiADC /= 10;
+    uiADC = soma/i;
 
-  pBufferTx[4] = '.';
-  
-  pBufferTx[3] = uiADC%10 + '0';
-  uiADC /= 10;
-   
-  pBufferTx[2] = uiADC%10 + '0';
-  uiADC /= 10;
-  
-  pBufferTx[1] = ':';
-  pBufferTx[0] = 'T';
-  
-  HAL_UART_Transmit_IT(&huart3, pBufferTx, 8);
+    soma = 0;
+    i = 0;
+
+    if(uiADC < SETPOINT - THRESHOLD)
+    {
+      HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_SET);
+    }
+    else if(uiADC > SETPOINT)
+    {
+      HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_RESET);    
+    }
+
+    pBufferTx[6] = '\n';
+
+    pBufferTx[5] = uiADC%10 + '0';
+    uiADC /= 10;
+
+    pBufferTx[4] = '.';
+    
+    pBufferTx[3] = uiADC%10 + '0';
+    uiADC /= 10;
+    
+    pBufferTx[2] = uiADC%10 + '0';
+    uiADC /= 10;
+    
+    pBufferTx[1] = ':';
+    pBufferTx[0] = 'T';
+
+    HAL_UART_Transmit_IT(&huart3, pBufferTx, 7);
+  }
+
 }
 
 void SystemClock_Config(void)
@@ -135,5 +148,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 { 
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
