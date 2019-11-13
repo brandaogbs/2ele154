@@ -6,11 +6,11 @@
 #include "gpio.h"
 
 #include <stdio.h>
-#include <stdarg.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define THRESHOLD 60
-#define SETPOINT  600
+#define SETPOINT  800
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -54,17 +54,17 @@ int main(void){
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
   
-  i++;
-
   uiADC = HAL_ADC_GetValue(hadc);
-  fADC = (3000* uiADC)/4096;
-  uiADC = (int) fADC;
+  uiADC = (int)(3000* uiADC)/4096;
   
   soma += uiADC;
 
-  if(i == 10000/2)
+  i++;
+
+  if(i == 10000)
   {
     uiADC = soma/i;
+    fADC = ((float)uiADC)/10;
 
     soma = 0;
     i = 0;
@@ -77,6 +77,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
     {
       HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_RESET);    
     }
+
 
     pBufferTx[6] = '\n';
 
