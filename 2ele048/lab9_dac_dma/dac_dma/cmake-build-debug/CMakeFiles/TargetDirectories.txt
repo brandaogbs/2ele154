@@ -1,0 +1,3 @@
+/home/gbs/CLionProjects/dac_dma/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/gbs/CLionProjects/dac_dma/cmake-build-debug/CMakeFiles/dac_dma.elf.dir
+/home/gbs/CLionProjects/dac_dma/cmake-build-debug/CMakeFiles/edit_cache.dir

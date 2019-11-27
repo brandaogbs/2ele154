@@ -1,7 +1,0 @@
-{
-    "terminal.integrated.env.linux": {
-        "PATH": "/home/gbs/.platformio/penv/bin:/home/gbs/.platformio/penv:/home/gbs/bin:/home/gbs/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
-        "PLATFORMIO_CALLER": "vscode"
-    },
-    "git.ignoreLimitWarning": true
-}

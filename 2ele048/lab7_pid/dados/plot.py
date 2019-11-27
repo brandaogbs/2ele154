@@ -27,7 +27,7 @@ while True:
             print("T:{:10.2f}\tST:{:10.2f}\tER:{:10.2f}".format(temp, set_point, erro))
         except:
             continue
-        with open("pid_20_10_0.1.csv","a") as f:
+        with open("pid_10_10_5.csv","a") as f:
             writer = csv.writer(f,delimiter=",")
             writer.writerow([time.time(),temp,set_point,erro])
 

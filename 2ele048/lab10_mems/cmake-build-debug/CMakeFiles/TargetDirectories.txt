@@ -1,0 +1,3 @@
+/home/gbs/CLionProjects/mems/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/gbs/CLionProjects/mems/cmake-build-debug/CMakeFiles/mems.elf.dir
+/home/gbs/CLionProjects/mems/cmake-build-debug/CMakeFiles/edit_cache.dir

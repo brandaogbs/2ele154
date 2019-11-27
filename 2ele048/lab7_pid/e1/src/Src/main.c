@@ -11,8 +11,8 @@
 
 #define THRESHOLD 00
 #define SETPOINT 80
-#define KP 20
-#define KI 0.1
+#define KP 10
+#define KI 5
 #define KD 10
 #define DT 0.1
 
