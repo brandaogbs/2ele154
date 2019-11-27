@@ -44,7 +44,7 @@ def get_accel():
     yAngle *= 180.00
     zAngle *= 180.00
     xAngle /= 3.141592 
-    yAngle /= 3.141592 
+    yAngle /= 3.141592
     zAngle /= 3.141592
 
     accel_data = {  'ax' : xAngle,
@@ -54,10 +54,6 @@ def get_accel():
     print("x:{:10.2f}\ny:{:10.2f}\nz:{:10.2f}\n".format(accel_data['ax'],accel_data['ay'],accel_data['az']) )
     return accel_data
 
-
-###############################################################################
-#                                 Blocos
-###############################################################################
 class Block(object):
 
     def __init__(self, x, y, width, height, color, speed):
@@ -77,7 +73,6 @@ class Block(object):
         self.y += accel_data['ay']/10
         self.x += accel_data['ax']/10
 
-
         if self.x > DISPLAY_WIDTH:
             self.x = DISPLAY_WIDTH
 
@@ -89,8 +84,6 @@ class Block(object):
 
         if self.y < 0:
             self.y = 0
-
-
 
 def game_loop():
     block = Block(DISPLAY_WIDTH//2, DISPLAY_HEIGHT//2, 10, 10, green, 1)
